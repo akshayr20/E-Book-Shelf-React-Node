@@ -11,11 +11,7 @@ module.exports.getAllProducts = async () => {
 			count: products.length,
 			products: products.map(product => {
 				return {
-					id: product._id,
-					name: product.name,
-					price: product.price,
-					productImage: product.productImage,
-					description: product.description,
+					...product,
 					request: {
 						type: 'GET',
 						description: 'PRODUCT_INFO',
@@ -36,11 +32,7 @@ module.exports.getProductById = async id => {
 			throw new Error('NO_PRODUCT_FOUND');
 		}
 		return {
-			id: product._id,
-			name: product.name,
-			price: product.price,
-			productImage: product.productImage,
-			description: product.description,
+			...product,
 			request: {
 				type: 'GET',
 				description: 'GET_ALL_PRODUCTS',
@@ -91,9 +83,9 @@ module.exports.updateProductById = async (id, product) => {
 	}
 };
 
-module.exports.deleteProductById = async (id) => {
+module.exports.deleteProductById = async id => {
 	try {
-        await Product.remove({ _id: id });
+		await Product.remove({ _id: id });
 		return {
 			message: 'PRODUCT_DELETED',
 			request: {
