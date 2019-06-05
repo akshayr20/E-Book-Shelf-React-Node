@@ -8,6 +8,7 @@ import UserOrders from './user/user-orders';
 import UserProfile from './user/user-profile';
 import Login from './authentication/login';
 import SignUp from './authentication/sign-up';
+import LandingScreen from './user/landing-screen';
 
 export interface AppProps {}
 
@@ -20,6 +21,7 @@ class App extends React.Component<AppProps, AppState> {
 				<BrowserRouter>
 					<Navbar />
 					<div>
+						<Route path="/" exact component={LandingScreen} />
 						<Route path="/cart" component={ShoppingCart} />
 						<Route path="/product" exact component={Product} />
 						<Route path="/product/:id" component={Product} />

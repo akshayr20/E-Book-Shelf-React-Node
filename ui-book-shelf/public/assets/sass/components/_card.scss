@@ -1,0 +1,16 @@
+.card {
+	padding: 1.6rem;
+	display: grid;
+	grid-template-columns: minmax(20rem, 25rem);
+	grid-template-rows: minmax(10rem, 16rem) minmax(3rem, 5rem) minmax(4rem, 6rem);
+	grid-gap: 2rem;
+	box-shadow: var(--shadow-light);
+	&__body {
+		justify-self: center;
+	}
+	&__footer {
+		button {
+			width: 100%;
+		}
+	}
+}
