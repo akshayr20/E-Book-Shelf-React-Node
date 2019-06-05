@@ -1,0 +1,25 @@
+@import '../abstracts/variable';
+@import '../base/animations';
+
+.auth {
+	position: relative;
+	.form {
+		width: 40vw;
+		padding: 2rem 4rem;
+		background-color: white;
+		border-radius: 4px;
+		-webkit-box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+		animation-name: scaling;
+		animation-duration: 1.2s;
+		@media only screen and (max-width: $bp-medium) {
+			width: 90vw;
+			max-height: 70vh;
+			padding: 2.5vw;
+		}
+		&__btn {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+}

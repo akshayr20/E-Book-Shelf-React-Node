@@ -1,0 +1,46 @@
+.ui-btn {
+	text-decoration: none;
+	text-transform: capitalize;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0;
+	min-width: 12rem;
+	border-radius: 4px;
+	line-height: 4rem;
+	background-color: white;
+	color: #666666;
+	font-size: 1.6rem;
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid #979ea3;
+	vertical-align: middle;
+	-webkit-appearance: none;
+	padding: 0 1.6rem;
+
+	&__primary {
+		box-shadow: 0 4px 10px 1px rgba(37, 92, 183, 0.3);
+		background-color: #4285f4;
+		border-color: #4285f4;
+		color: #ffffff;
+	}
+
+	&__primary:focus {
+		outline: none;
+		background-color: #4285f4;
+	}
+
+	&__white {
+		border: 1px solid #bbb;
+		color: #666;
+		background-color: #fff;
+	}
+
+	&__white:focus {
+		color: #666;
+		background-color: #fff;
+	}
+
+	&__white:hover {
+		background-color: #f5f5f5;
+	}
+}

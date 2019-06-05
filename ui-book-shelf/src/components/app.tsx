@@ -6,6 +6,8 @@ import Product from './admin/product';
 import ProductList from './admin/product-list';
 import UserOrders from './user/user-orders';
 import UserProfile from './user/user-profile';
+import Login from './authentication/login';
+import SignUp from './authentication/sign-up';
 
 export interface AppProps {}
 
@@ -24,6 +26,8 @@ class App extends React.Component<AppProps, AppState> {
 						<Route path="/products" exact component={ProductList} />
 						<Route path="/orders" component={UserOrders} />
 						<Route path="/profile" component={UserProfile} />
+						<Route path="/login" component={Login} />
+						<Route path="/sign-up" component={SignUp} />
 					</div>
 				</BrowserRouter>
 			</div>
