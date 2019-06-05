@@ -1,18 +1,22 @@
 import React from 'react';
 import Search from './search';
-import Navbar from './navbar';
+import NavDropDown from './nav-dropdown';
+import { Link } from 'react-router-dom';
 
 export interface HeaderProps {}
 
 const Header: React.SFC<HeaderProps> = () => {
 	return (
 		<header className="header">
-			<a className="logo">
+			<Link to="/" className="logo">
 				<img src="/images/logo.jpg" alt="E-Shop logo" />
-			</a>
+			</Link>
 			<Search />
 			<div className="nav">
-				<Navbar />
+				<NavDropDown />
+				<Link to="/cart" className="color-primary">
+					My CART
+				</Link>
 			</div>
 		</header>
 	);
