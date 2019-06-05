@@ -20,16 +20,8 @@ module.exports.getOrderById = async (req, res) => {
 
 module.exports.createOrder = async (req, res) => {
 	try {
-		const response = await orderService.createOrder(req.body.productId, req.body.quantity);
-		res.status(200).json(response);
-	} catch (error) {
-		res.status(500).json(error);
-	}
-};
-
-module.exports.updateOrderById = async (req, res) => {
-	try {
-		const response = await orderService.updateOrderById(req.params.id, req.body.quantity);
+		const { productId, purchaseQuantity, userId } = req.body;
+		const response = await orderService.createOrder(productId, purchaseQuantity, userId);
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json(error);

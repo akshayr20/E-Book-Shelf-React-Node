@@ -1,3 +1,4 @@
+// @ts-check
 const User = require('./user.model');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -39,14 +40,17 @@ module.exports.login = async (email, password) => {
 			throw new Error('AUTH_FAILED');
 		}
 
-		return await new Promise((resolve, reject) => {
-			bcrypt.compare(password, user.password, (err, result) => {
-				if (err) reject('AUTH_FAILED');
-				if (result) {
+		const token = await new Promise((resolve, reject) => {
+			bcrypt.compare(password, user.password, (err, success) => {
+				if (err || !success) {
+					reject('AUTH_FAILED');
+				}
+				if (success) {
 					const token = jwt.sign(
 						{
 							email: user.email,
-							userId: user._id
+							userId: user._id,
+							isAdmin: user.isAdmin
 						},
 						process.env.JWT_SECRET,
 						{
@@ -60,7 +64,9 @@ module.exports.login = async (email, password) => {
 				}
 			});
 		});
+		return token;
 	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 };

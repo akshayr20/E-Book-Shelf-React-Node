@@ -9,16 +9,7 @@ module.exports.getAllProducts = async () => {
 		}
 		return {
 			count: products.length,
-			products: products.map(product => {
-				return {
-					...product,
-					request: {
-						type: 'GET',
-						description: 'PRODUCT_INFO',
-						url: `http://localhost:3000/products/${product._id}`
-					}
-				};
-			})
+			...products
 		};
 	} catch (error) {
 		throw error;
@@ -31,13 +22,13 @@ module.exports.getProductById = async id => {
 		if (!product) {
 			throw new Error('NO_PRODUCT_FOUND');
 		}
+		const { _id, name, price, productImage, description } = product;
 		return {
-			...product,
-			request: {
-				type: 'GET',
-				description: 'GET_ALL_PRODUCTS',
-				url: `http://localhost:3000/products`
-			}
+			_id,
+			name,
+			price,
+			productImage,
+			description
 		};
 	} catch (error) {
 		throw error;
@@ -50,33 +41,25 @@ module.exports.createProduct = async productData => {
 			_id: new mongoose.Types.ObjectId(),
 			...productData
 		});
-		const result = await product.save();
+		await product.save();
 		return {
-			message: 'PRODUCT_CREATED',
-			request: {
-				type: 'GET',
-				description: 'GET_PRODUCT_INFO',
-				url: `http://localhost:3000/products/${result._id}`
-			}
+			message: 'PRODUCT_CREATED'
 		};
 	} catch (error) {
 		throw error;
 	}
 };
 
-module.exports.updateProductById = async (id, product) => {
+module.exports.updateProductById = async (id, updatedProduct) => {
 	try {
-		const updatedProduct = {
-			$set: product
-		};
-		await Product.update({ _id: id }, updatedProduct);
-		return {
-			message: 'PRODUCT_UPDATED',
-			request: {
-				type: 'GET',
-				description: 'GET_PRODUCT_INFO',
-				url: `http://localhost:3000/products/${id}`
+		await Product.update(
+			{ _id: id },
+			{
+				$set: updatedProduct
 			}
+		);
+		return {
+			message: 'PRODUCT_UPDATED'
 		};
 	} catch (error) {
 		throw error;
@@ -87,12 +70,7 @@ module.exports.deleteProductById = async id => {
 	try {
 		await Product.remove({ _id: id });
 		return {
-			message: 'PRODUCT_DELETED',
-			request: {
-				type: 'GET',
-				description: 'GET_ALL_PRODUCTS',
-				url: `http://localhost:3000/products`
-			}
+			message: 'PRODUCT_DELETED'
 		};
 	} catch (error) {
 		throw error;

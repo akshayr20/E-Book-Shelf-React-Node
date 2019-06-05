@@ -4,7 +4,7 @@ const router = express.Router();
 
 const multer = require('multer');
 
-const checkAuth = require('../../authorization/check-auth');
+const adminGuard = require('../../authorization/admin-guard');
 
 const storage = multer.diskStorage({
 	destination: function(req, file, cb) {
@@ -38,10 +38,10 @@ router.get('/', getAllProducts);
 
 router.get('/:id', getProductById);
 
-router.post('/', checkAuth, upload.single('productImage'), createProduct);
+router.post('/', adminGuard, createProduct);
 
-router.patch('/:id', checkAuth, updateProductById);
+router.patch('/:id', adminGuard, updateProductById);
 
-router.delete('/:id', checkAuth, deleteProductById);
+router.delete('/:id', adminGuard, deleteProductById);
 
 module.exports = router;
