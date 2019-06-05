@@ -1,4 +1,6 @@
 // COLOR VARIABLES
+@import '../abstracts/variable';
+
 *,
 *::before,
 *::after {
@@ -9,8 +11,16 @@
 
 html {
 	box-sizing: border-box;
+	font-size: 62.5%;
+	@media only screen and (max-width: $bp-largest) {
+		font-size: 50%;
+	}
 }
 
 body {
-	color: #444444;
+	font-family: sans-serif;
+	color: #555;
+	font-weight: 300;
+	line-height: 1.6;
+	font-size: 1.6rem;
 }

@@ -1,5 +1,11 @@
+@import './abstracts/variable';
+
 @import './base/animations';
 @import './base/base';
 @import './base/reset';
 
 @import './utilities/utilities';
+
+@import './components/navbar';
+@import './components/searchbar';
+@import './components/header';
