@@ -1,17 +1,36 @@
 .card {
-	padding: 1.6rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
-	height: 30rem;
+	height: 40rem;
+
+	padding: 1rem;
+	margin: 1rem 0;
+
 	min-width: 30rem;
 	width: 25%;
+
 	box-shadow: var(--shadow-light);
+
+	&__image {
+		width: 100%;
+		height: 70%;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
 	&__body {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		flex-direction: column;
 		width: 100%;
+
+		.title {
+			color: #111;
+		}
 	}
 }

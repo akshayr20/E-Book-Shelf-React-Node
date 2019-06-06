@@ -20,7 +20,7 @@ class ProductsList extends React.Component<ProductsListProps, ProductsListState>
 	}
 
 	render() {
-		return <div className="flex-space-between u-mt-md">{this.renderList()}</div>;
+		return <div className="product-list u-mt-md">{this.renderList()}</div>;
 	}
 }
 

@@ -12,11 +12,12 @@ export interface CardProps {
 const Card: React.SFC<CardProps> = props => {
 	return (
 		<div className="card">
-			<img src={props.product.imageUrl} alt={props.product.title} />
+			<div className="card__image">
+				<img src={props.product.imageUrl} alt={props.product.title} />
+			</div>
 			<div className="card__body">
-				<h2>{props.product.title}</h2>
-				<h4>{props.product.description}</h4>
-				<h4>Price: {props.product.price}</h4>
+				<span className="price">Price: {props.product.price}</span>
+				<span className="title">{props.product.title}</span>
 				<button className="ui-btn ui-btn__primary max-width" onClick={() => props.onAddToCart(props.product)}>
 					Add to Cart
 				</button>
