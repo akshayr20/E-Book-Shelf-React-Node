@@ -3,8 +3,6 @@
 .app-container {
 	padding: 1rem 2rem;
 	background-color: #faf9f9;
-	min-height: 50rem;
-	box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.125);
 }
 
 .product-list {
@@ -15,3 +13,9 @@
 		justify-content: center;
 	}
 }
+
+.no-products {
+	padding: 2rem;
+	border-bottom: 0.4rem solid #c5c4c4;
+  }
+  

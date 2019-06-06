@@ -1,17 +1,21 @@
 .color-primary {
-	color: #4183c4;
-}
-
-.color-orange {
-	color: #ffb53e;
+	color: #4183c4 !important;
 }
 
 .color-red {
-	color: #f9243f;
+	color: #f9243f !important;
 }
 
 .color-white {
-	color: #fff;
+	color: #fff !important;
+}
+
+.bg-color-primary {
+	background-color: #4183c4 !important;
+}
+
+.bg-color-red {
+	background-color: #f9243f !important;
 }
 
 // margin bottom
@@ -62,4 +66,14 @@
 	width: 50%;
 }
 
-// Flex
+// images
+.u-md-image {
+	max-height: 16rem;
+}
+
+// table
+.middle {
+	td {
+		vertical-align: middle;
+	}
+}
