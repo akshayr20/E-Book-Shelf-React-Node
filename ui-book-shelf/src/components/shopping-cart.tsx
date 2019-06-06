@@ -18,9 +18,9 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 				<tr key={item._id}  className="middle">
 					<td>{i + 1}</td>
 					<td>
-						<img className="u-md-image" src={item.imageUrl} alt={item.title} />
+						<img className="u-md-image" src={item.imageUrl} alt={item.name} />
 					</td>
-					<td>{item.title}</td>
+					<td>{item.name}</td>
 					<td>Rs. {item.price}.00</td>
 					<td>
 						<span className="snippet-btn">

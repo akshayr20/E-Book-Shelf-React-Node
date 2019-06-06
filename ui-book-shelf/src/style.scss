@@ -8,10 +8,8 @@
 .product-list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
-	@media only screen and (max-width: $bp-medium) {
-		justify-content: flex-start;
-	}
+	justify-content: flex-start;
+
 	@media only screen and (max-width: $bp-small) {
 		justify-content: center;
 	}
@@ -20,5 +18,4 @@
 .no-products {
 	padding: 2rem;
 	border-bottom: 0.4rem solid #c5c4c4;
-  }
-  
+}

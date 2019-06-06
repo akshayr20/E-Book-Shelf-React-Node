@@ -9,7 +9,7 @@ module.exports.getAllProducts = async () => {
 		}
 		return {
 			count: products.length,
-			...products
+			products: [...products]
 		};
 	} catch (error) {
 		throw error;

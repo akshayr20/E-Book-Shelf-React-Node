@@ -7,3 +7,10 @@ export const addToCart = (product: Product) => {
 		payload: product
 	};
 };
+
+export const productList = (products: Array<Product>) => {
+	return {
+		type: 'PRODUCT_LIST',
+		payload: products
+	};
+};
