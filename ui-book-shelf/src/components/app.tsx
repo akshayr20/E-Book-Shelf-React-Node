@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './navbar';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ShoppingCart from './shopping-cart';
-import Product from './admin/edit-product';
+import Product from './admin/product-form';
 import ProductList from './admin/edit-products';
 import UserOrders from './user/user-orders';
 import UserProfile from './user/user-profile';
