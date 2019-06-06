@@ -14,18 +14,6 @@
 	color: #fff;
 }
 
-.u-sm-font {
-	font-size: 1.2rem;
-}
-
-.u-md-font {
-	font-size: 1.6rem;
-}
-
-.u-lg-font {
-	font-size: 1.8rem;
-}
-
 // margin bottom
 .u-mb-sm {
 	margin-bottom: 1rem;
@@ -37,6 +25,11 @@
 
 .u-mb-lg {
 	margin-bottom: 4rem;
+}
+
+//margin-top
+.u-mt-md {
+	margin-top: 2rem;
 }
 
 // padding
@@ -58,4 +51,20 @@
 
 .center-text {
 	text-align: center;
+}
+
+//width
+.max-width {
+	width: 100%;
+}
+
+.half-width {
+	width: 50%;
+}
+
+// Flex
+.flex-space-between {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }

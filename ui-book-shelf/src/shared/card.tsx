@@ -15,11 +15,9 @@ const Card: React.SFC<CardProps> = props => {
 			<img src={props.product.imageUrl} alt={props.product.title} />
 			<div className="card__body">
 				<h2>{props.product.title}</h2>
-				<h3>{props.product.description}</h3>
+				<h4>{props.product.description}</h4>
 				<h4>{props.product.price}</h4>
-			</div>
-			<div className="card__footer">
-				<button className="ui-btn ui-btn__primary">Add to Cart</button>
+				<button className="ui-btn ui-btn__primary max-width">Add to Cart</button>
 			</div>
 		</div>
 	);
