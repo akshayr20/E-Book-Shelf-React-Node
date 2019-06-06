@@ -1,5 +1,4 @@
 import React from 'react';
-
 export interface CardProps {
 	product: {
 		imageUrl: string;
@@ -7,6 +6,7 @@ export interface CardProps {
 		description: string;
 		price: number;
 	};
+	onAddToCart: Function;
 }
 
 const Card: React.SFC<CardProps> = props => {
@@ -16,8 +16,10 @@ const Card: React.SFC<CardProps> = props => {
 			<div className="card__body">
 				<h2>{props.product.title}</h2>
 				<h4>{props.product.description}</h4>
-				<h4>{props.product.price}</h4>
-				<button className="ui-btn ui-btn__primary max-width">Add to Cart</button>
+				<h4>Price: {props.product.price}</h4>
+				<button className="ui-btn ui-btn__primary max-width" onClick={() => props.onAddToCart(props.product)}>
+					Add to Cart
+				</button>
 			</div>
 		</div>
 	);

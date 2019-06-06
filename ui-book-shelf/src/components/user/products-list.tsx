@@ -1,11 +1,13 @@
 import React from 'react';
 import Card from '../../shared/card';
+import { addToCart } from '../../actions';
 
 import { connect } from 'react-redux';
 import { Product } from '../../interface';
 
 export interface ProductsListProps {
 	products: Array<Product>;
+	addToCart: Function;
 }
 
 export interface ProductsListState {}
@@ -13,7 +15,7 @@ export interface ProductsListState {}
 class ProductsList extends React.Component<ProductsListProps, ProductsListState> {
 	renderList() {
 		return this.props.products.map(product => {
-			return <Card product={product} key={product._id} />;
+			return <Card product={product} key={product._id} onAddToCart={(selectedProduct: Product) => this.props.addToCart(selectedProduct)} />;
 		});
 	}
 
@@ -24,7 +26,11 @@ class ProductsList extends React.Component<ProductsListProps, ProductsListState>
 
 const mapStateToProps = (state: any) => {
 	console.log(state);
+
 	return { products: state.products };
 };
 
-export default connect(mapStateToProps)(ProductsList);
+export default connect(
+	mapStateToProps,
+	{ addToCart }
+)(ProductsList);

@@ -1,12 +1,9 @@
-//  Action Creator
-export interface Action {
-	type: string;
-	payload: any;
-}
+import { Product } from '../interface';
 
-export const selectProduct = (product: any) => {
+//  Action Creator
+export const addToCart = (product: Product) => {
 	return {
-		type: 'PRODUCT_SELECTED',
+		type: 'ADD_TO_CART',
 		payload: product
 	};
 };

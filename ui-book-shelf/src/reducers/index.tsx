@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { Action } from '../actions';
+import { Action } from '../interface';
 import { Product } from '../interface';
 
 export const productsReducer = (): Array<Product> => {
@@ -43,9 +43,9 @@ export const productsReducer = (): Array<Product> => {
 	];
 };
 
-export const selectedProductsReducer = (selectedProducts = [], action: Action) => {
-	if (action.type === 'PRODUCT_SELECTED') {
-		return action.payload;
+export const addToCartReducer = (selectedProducts: Array<Product> = [], action: Action) => {
+	if (action.type === 'ADD_TO_CART') {
+		return [...selectedProducts, action.payload];
 	}
 
 	return selectedProducts;
@@ -53,5 +53,5 @@ export const selectedProductsReducer = (selectedProducts = [], action: Action) =
 
 export default combineReducers({
 	products: productsReducer,
-	cartItems: selectedProductsReducer
+	cartItems: addToCartReducer
 });
