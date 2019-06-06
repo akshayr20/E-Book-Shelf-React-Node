@@ -45,7 +45,10 @@ export const productsReducer = (): Array<Product> => {
 
 export const addToCartReducer = (selectedProducts: Array<Product> = [], action: Action) => {
 	if (action.type === 'ADD_TO_CART') {
-		return [...selectedProducts, action.payload];
+		const alreadyInTheCart = selectedProducts.find(product => product._id === action.payload._id);
+		if (!alreadyInTheCart) {
+			return [...selectedProducts, action.payload];
+		}
 	}
 
 	return selectedProducts;

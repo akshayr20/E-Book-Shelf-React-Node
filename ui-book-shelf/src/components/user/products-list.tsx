@@ -25,8 +25,6 @@ class ProductsList extends React.Component<ProductsListProps, ProductsListState>
 }
 
 const mapStateToProps = (state: any) => {
-	console.log(state);
-
 	return { products: state.products };
 };
 
