@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken');
 
-module.exports.signUp = async (email, password) => {
+module.exports.signUp = async (name, email, password) => {
 	try {
 		const existingUser = await User.find({ email });
 		if (existingUser.length) {
@@ -21,6 +21,7 @@ module.exports.signUp = async (email, password) => {
 
 		const user = new User({
 			_id: new mongoose.Types.ObjectId(),
+			name: name,
 			email: email,
 			password: hashedPassword
 		});

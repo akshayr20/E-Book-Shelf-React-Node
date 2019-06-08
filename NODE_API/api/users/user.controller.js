@@ -2,9 +2,10 @@ const userService = require('./users.service');
 
 module.exports.signUp = async (req, res) => {
 	try {
+		const name = req.body.name;
 		const email = req.body.email;
 		const password = req.body.password;
-		const createUserStatus = await userService.signUp(email, password);
+		const createUserStatus = await userService.signUp(name, email, password);
 
 		res.status(201).json({
 			message: createUserStatus

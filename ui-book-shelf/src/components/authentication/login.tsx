@@ -1,15 +1,19 @@
 import React from 'react';
+import { fetchAndSetToken } from '../../actions';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-export interface LoginProps {}
+export interface LoginProps {
+	fetchAndSetToken: Function;
+}
 
 class Login extends React.Component<LoginProps> {
 	state = { email: '', password: '' };
 
 	handleSubmit = (event: any) => {
 		event.preventDefault();
-		console.log(this.state);
+		this.props.fetchAndSetToken(this.state);
 	};
 
 	render() {
@@ -54,4 +58,7 @@ class Login extends React.Component<LoginProps> {
 	}
 }
 
-export default Login;
+export default connect(
+	null,
+	{ fetchAndSetToken }
+)(Login);

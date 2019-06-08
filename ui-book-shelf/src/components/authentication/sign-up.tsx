@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { createAccount } from '../../actions';
 
-export interface SignUpProps {}
+export interface SignUpProps {
+	createAccount: Function;
+}
 
 class SignUp extends React.Component<SignUpProps> {
 	state = { name: '', email: '', password: '' };
 
 	handleSubmit = (event: any) => {
 		event.preventDefault();
-		console.log(this.state);
+		this.props.createAccount(this.state);
 	};
 
 	render() {
@@ -60,4 +64,7 @@ class SignUp extends React.Component<SignUpProps> {
 	}
 }
 
-export default SignUp;
+export default connect(
+	null,
+	{ createAccount }
+)(SignUp);
