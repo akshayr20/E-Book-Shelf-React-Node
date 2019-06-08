@@ -10,10 +10,12 @@ export interface CardProps {
 }
 
 const Card: React.SFC<CardProps> = props => {
+	console.log(props.product.imageUrl);
 	return (
 		<div className="card">
 			<div className="card__image">
-				<img src="https://amp.businessinsider.com/images/59f8dc483e9d25db458b5dfc-750-563.jpg" alt={props.product.name} />
+
+				<img src={props.product.imageUrl} alt={props.product.name} />
 			</div>
 			<div className="card__body">
 				<span className="price">Price: {props.product.price}</span>

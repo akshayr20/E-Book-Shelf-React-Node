@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 module.exports.getAllProducts = async () => {
 	try {
-		const products = await Product.find().select('name price _id productImage description');
+		const products = await Product.find().select('name price _id productImage description  imageUrl');
 		if (!products.length) {
 			throw new Error('NO_PRODUCT_FOUND');
 		}
@@ -18,7 +18,7 @@ module.exports.getAllProducts = async () => {
 
 module.exports.getProductById = async id => {
 	try {
-		const product = await Product.findById(id).select('name price productImage description');
+		const product = await Product.findById(id).select('name price productImage description imageUrl');
 		if (!product) {
 			throw new Error('NO_PRODUCT_FOUND');
 		}

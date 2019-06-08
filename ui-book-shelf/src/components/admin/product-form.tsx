@@ -1,23 +1,29 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import { createProduct } from '../../actions';
+import { connect } from 'react-redux';
 
-export interface ProductProps {}
+export interface ProductProps {
+	createProduct: Function;
+}
 
 export interface ProductState {}
 
 class EditProduct extends React.Component<ProductProps, ProductState> {
-	state = { imageUrl: '', title: '', description: '', price: '', availableStock: '' };
+	state = { imageUrl: '', name: '', description: '', price: '', availableStock: '' };
+
 	handleSubmit = (event: any) => {
 		event.preventDefault();
-		console.log(this.state);
+		this.props.createProduct(this.state);
 	};
+
 	render() {
 		return (
 			<div className="product-form">
 				<Form onSubmit={(e: any) => this.handleSubmit(e)}>
 					<Form.Group controlId="formGroupTitle">
 						<Form.Label>Book Title</Form.Label>
-						<Form.Control required type="text" placeholder="Enter Book Title" value={this.state.title} onChange={(event: any) => this.setState({ title: event.target.value })} />
+						<Form.Control required type="text" placeholder="Enter Book Title" value={this.state.name} onChange={(event: any) => this.setState({ name: event.target.value })} />
 					</Form.Group>
 					<Form.Group controlId="formGroupDescription">
 						<Form.Label>Description</Form.Label>
@@ -62,4 +68,7 @@ class EditProduct extends React.Component<ProductProps, ProductState> {
 	}
 }
 
-export default EditProduct;
+export default connect(
+	null,
+	{ createProduct }
+)(EditProduct);
