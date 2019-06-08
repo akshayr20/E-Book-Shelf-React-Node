@@ -18,8 +18,8 @@
 	box-shadow: var(--shadow-light);
 
 	&__image {
-		max-width: 25rem;
-		max-height: 30rem;
+		width: 25rem;
+		height: 30rem;
 		border: 1px solid #ccc;
 		border-radius: 5px;
 		img {

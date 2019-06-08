@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from '../../shared/card';
-import axios from 'axios';
 
-import { addToCart, productList } from '../../actions';
+import { addToCart, fetchProducts } from '../../actions';
 
 import { connect } from 'react-redux';
 import { Product } from '../../interface';
@@ -10,26 +9,26 @@ import { Product } from '../../interface';
 export interface ProductsListProps {
 	products: Array<Product>;
 	addToCart: Function;
-	productList: Function;
+	fetchProducts: Function;
 }
 
 export interface ProductsListState {}
 
 class ProductsList extends React.Component<ProductsListProps, ProductsListState> {
 	componentDidMount() {
-		this.fetchProducts();
+		this.props.fetchProducts();
 	}
 
-	fetchProducts() {
-		axios
-			.get(`http://localhost:8080/products`)
-			.then((response: any) => {
-				this.props.productList(response.data.products);
-			})
-			.catch((error: any) => {
-				console.log(error);
-			});
-	}
+	// fetchProducts() {
+	// 	axios
+	// 		.get(`http://localhost:8080/products`)
+	// 		.then((response: any) => {
+	// 			this.props.productList(response.data.products);
+	// 		})
+	// 		.catch((error: any) => {
+	// 			console.log(error);
+	// 		});
+	// }
 
 	renderList() {
 		console.log(this.props)
@@ -49,5 +48,5 @@ const mapStateToProps = (state: any) => {
 
 export default connect(
 	mapStateToProps,
-	{ addToCart, productList }
+	{ addToCart, fetchProducts }
 )(ProductsList);

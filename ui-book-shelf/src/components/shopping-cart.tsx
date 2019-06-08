@@ -22,13 +22,13 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 					</td>
 					<td>{item.name}</td>
 					<td>Rs. {item.price}.00</td>
-					<td>
+					{/* <td>
 						<span className="snippet-btn">
 							<button className="ui-btn  bg-color-red">-</button>
 							<span className="u-sm-pd">2</span>
 							<button className="ui-btn bg-color-primary">+</button>
 						</span>
-					</td>
+					</td> */}
 				</tr>
 			);
 		});
@@ -47,7 +47,7 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 							<th>Image</th>
 							<th>Title</th>
 							<th>Price</th>
-							<th>Quantity</th>
+							{/* <th>Quantity</th> */}
 						</tr>
 					</thead>
 					<tbody>{this.renderCartItems()}</tbody>

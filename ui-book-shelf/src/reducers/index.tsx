@@ -4,7 +4,7 @@ import { Action } from '../interface';
 import { Product } from '../interface';
 
 export const productsReducer = (Products: Array<Product> = [], action: Action): Array<Product> => {
-	if (action.type === 'PRODUCT_LIST') {
+	if (action.type === 'FETCH_PRODUCTS') {
 		return [...action.payload];
 	}
 	return Products;
