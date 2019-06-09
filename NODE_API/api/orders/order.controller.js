@@ -9,9 +9,9 @@ module.exports.getAllOrders = async (req, res) => {
 	}
 };
 
-module.exports.getOrderById = async (req, res) => {
+module.exports.getUserOrders = async (req, res) => {
 	try {
-		const response = await orderService.getOrderById(req.params.id);
+		const response = await orderService.getUserOrders(req.params.id);
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json({ error });
@@ -20,8 +20,8 @@ module.exports.getOrderById = async (req, res) => {
 
 module.exports.createOrder = async (req, res) => {
 	try {
-		const { productId, purchaseQuantity, userId } = req.body;
-		const response = await orderService.createOrder(productId, purchaseQuantity, userId);
+		const userCart = req.body.userCart;
+		const response = await orderService.createOrder(userCart);
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json(error);

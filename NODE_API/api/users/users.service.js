@@ -49,7 +49,7 @@ module.exports.login = async (email, password) => {
 				if (success) {
 					const token = jwt.sign(
 						{
-							email: user.email,
+							name: user.name,
 							userId: user._id,
 							isAdmin: user.isAdmin
 						},

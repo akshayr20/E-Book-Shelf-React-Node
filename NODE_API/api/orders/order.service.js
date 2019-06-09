@@ -26,47 +26,49 @@ module.exports.getAllOrders = async () => {
 	}
 };
 
-module.exports.getOrderById = async id => {
+module.exports.getUserOrders = async id => {
 	try {
-		const order = await Order.findById(id).select('productId purchaseQuantity _id');
+		const orders = await Order.find({ userId: id })
+			.select('productId purchaseQuantity _id')
+			.populate('product', 'name');
 		if (!order) {
 			throw new Error('NO_ORDER_FOUND');
 		}
-		const { _id, productId, purchaseQuantity } = order;
-		return {
-			_id,
-			productId,
-			purchaseQuantity
-		};
+		return { orders };
 	} catch (error) {
 		throw error;
 	}
 };
 
-module.exports.createOrder = async (productId, purchaseQuantity, userId) => {
+module.exports.createOrder = async userCart => {
 	try {
-		const product = await Product.findById(productId);
-		if (!product) {
-			throw new Error('PRODUCT_NOT_FOUND');
-		}
+		console.log(userCart);
 
-		if (product.availableStock < purchaseQuantity) {
-			if (product.availableStock) {
-				throw new Error(`Sorry Only ${product.availableStock}  items left in stock`);
+		for (const item of userCart) {
+			const { productId, purchaseQuantity, userId } = item;
+			const product = await Product.findById(productId);
+			if (!product) {
+				throw new Error('PRODUCT_NOT_FOUND');
 			}
-			throw new Error(`Item Currently Out of Stock`);
+
+			if (product.availableStock < purchaseQuantity) {
+				if (product.availableStock) {
+					throw new Error(`Sorry Only ${product.availableStock}  items left in stock`);
+				}
+				throw new Error(`Item Currently Out of Stock`);
+			}
+
+			const order = new Order({
+				_id: new mongoose.Types.ObjectId(),
+				productId,
+				purchaseQuantity,
+				userId
+			});
+
+			await order.save();
+
+			await Product.update({ _id: productId }, { $inc: { availableStock: -purchaseQuantity } });
 		}
-
-		const order = new Order({
-			_id: new mongoose.Types.ObjectId(),
-			productId,
-			purchaseQuantity,
-			userId
-		});
-
-		await order.save();
-
-		await Product.update({ _id: productId }, { $inc: { availableStock: -purchaseQuantity } });
 
 		return {
 			message: 'ORDER_CREATED'
