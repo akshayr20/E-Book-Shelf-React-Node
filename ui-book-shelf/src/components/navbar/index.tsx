@@ -14,15 +14,6 @@ const Header: React.SFC<HeaderProps> = () => {
 			<Search />
 			<div className="nav">
 				<NavDropDown />
-				<div>
-					<Link to="/login" className="color-white">
-						Login&nbsp;
-					</Link>
-					<span className="color-white">/</span>
-					<Link to="/sign-up" className="color-white">
-						&nbsp;Sign Up
-					</Link>
-				</div>
 
 				<Link to="/cart" className="color-white">
 					My CART

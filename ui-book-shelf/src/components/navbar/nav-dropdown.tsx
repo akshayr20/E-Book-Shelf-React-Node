@@ -3,33 +3,44 @@ import { Link } from 'react-router-dom';
 import onClickOutside from 'react-onclickoutside';
 
 class NavDropDown extends React.Component<any> {
-	state = { isDropDownVisible: false };
+	state = { on: false, loggedIn: false };
 
-	onShowDropDown = () => {
-		this.setState({ isDropDownVisible: !this.state.isDropDownVisible });
+	toggle = () => {
+		this.setState({ on: !this.state.on });
 	};
 
 	handleClickOutside = (evt: any) => {
-		this.setState({ isDropDownVisible: false });
+		this.setState({ on: false });
 	};
 
 	getDropDownClassName = () => {
-		const { isDropDownVisible } = this.state;
-		return `nav__action ${isDropDownVisible ? '' : 'hidden'}`;
+		const { on } = this.state;
+		return `nav__action ${on ? '' : 'hidden'}`;
 	};
+
+	renderSignInOptions() {
+		return (
+			<div>
+				<Link to="/login" className="color-white">
+					Hello, <span>Sign In</span>&nbsp;
+				</Link>
+			</div>
+		);
+	}
 
 	renderDropDown() {
 		return (
 			<div>
-				<button className="nav__action" onClick={this.onShowDropDown}>
+				<button className="nav__action" onClick={this.toggle} onMouseOver={() => this.setState({ on: true })}>
 					My Account ^
 				</button>
 				<div className={this.getDropDownClassName()}>
 					<div className="nav__dropdown">
 						<Link to="/profile">Edit Profile</Link>
-						<Link to="/orders">My Orders</Link>
-						<Link to="/orders">Manage Orders</Link>
-						<Link to="/products">Manage Products</Link>
+						{/* <Link to="/orders">My Orders</Link> */}
+						{/* <Link to="/orders">Manage Orders</Link> */}
+						{/* <Link to="/products">Manage Products</Link> */}
+						<Link to="/product">Create Products</Link>
 						<Link to="/logout">Logout</Link>
 					</div>
 				</div>
@@ -37,16 +48,8 @@ class NavDropDown extends React.Component<any> {
 		);
 	}
 
-	// <Link to="/login" className="nav__action">
-	// 						Login
-	// 					</Link>
-	// 					/
-	// 					<Link to="/sign-up" className="nav__action">
-	// 						Sign up
-	// 					</Link>
-
 	render() {
-		return this.renderDropDown();
+		return <div>{this.state.loggedIn ? this.renderDropDown() : this.renderSignInOptions()}</div>;
 	}
 }
 

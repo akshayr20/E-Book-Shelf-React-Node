@@ -22,11 +22,12 @@
 		width: max-content;
 		z-index: 10;
 		padding: 0.8rem;
-		background-color: #4183c4;
+		background-color:  #fff;
+		border: 1px solid #ccc;
 		a {
 			font-size: 1.4rem;
 			padding: 1rem 2rem;
-			color: #fff;
+			color: #4183c4;
 		}
 		a:hover {
 			background-color: #fff;

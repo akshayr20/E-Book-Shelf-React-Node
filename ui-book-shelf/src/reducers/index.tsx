@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 import { Action } from '../interface';
 import { Product } from '../interface';
 
+import authReducer from './auth-reducer';
+
 export const productsReducer = (Products: Array<Product> = [], action: Action): Array<Product> => {
 	if (action.type === 'FETCH_PRODUCTS') {
 		return [...action.payload];
@@ -23,5 +25,6 @@ export const addToCartReducer = (selectedProducts: Array<Product> = [], action: 
 
 export default combineReducers({
 	products: productsReducer,
-	cartItems: addToCartReducer
+	cartItems: addToCartReducer,
+	auth: authReducer
 });
