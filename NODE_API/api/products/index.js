@@ -6,6 +6,7 @@ const multer = require('multer');
 
 const adminGuard = require('../../authorization/admin-guard');
 
+
 const storage = multer.diskStorage({
 	destination: function(req, file, cb) {
 		cb(null, './uploads/');

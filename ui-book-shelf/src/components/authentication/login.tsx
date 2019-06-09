@@ -1,11 +1,11 @@
 import React from 'react';
-import { fetchAndSetToken } from '../../actions';
+import { login } from '../../actions/auth-actions';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 export interface LoginProps {
-	fetchAndSetToken: Function;
+	login: Function;
 }
 
 class Login extends React.Component<LoginProps> {
@@ -13,7 +13,7 @@ class Login extends React.Component<LoginProps> {
 
 	handleSubmit = (event: any) => {
 		event.preventDefault();
-		this.props.fetchAndSetToken(this.state);
+		this.props.login(this.state);
 	};
 
 	render() {
@@ -60,5 +60,5 @@ class Login extends React.Component<LoginProps> {
 
 export default connect(
 	null,
-	{ fetchAndSetToken }
+	{ login }
 )(Login);

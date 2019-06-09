@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { createAccount } from '../../actions';
+import { createAccount } from '../../actions/auth-actions';
 
 export interface SignUpProps {
 	createAccount: Function;
