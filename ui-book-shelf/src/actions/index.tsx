@@ -5,9 +5,13 @@ import AXIOS from '../api/axios-instance';
 
 
 export const fetchProducts = () => async (dispatch: any) => {
-	const response = await AXIOS.get('products');
-	const { products } = response.data;
-	dispatch({ type: 'FETCH_PRODUCTS', payload: products });
+	try {
+		const response = await AXIOS.get('products');
+		const { products } = response.data;
+		dispatch({ type: 'FETCH_PRODUCTS', payload: products });
+	} catch (error) {
+		dispatch({ type: 'FETCH_PRODUCTS', payload: [] });		
+	}
 };
 
 export const createProduct = (payload: Product) => async () => {

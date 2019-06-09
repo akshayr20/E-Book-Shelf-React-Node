@@ -1,9 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import onClickOutside from 'react-onclickoutside';
+import { connect } from 'react-redux';
 
-class NavDropDown extends React.Component<any> {
-	state = { on: false, loggedIn: false };
+import { logout } from '../../actions/auth-actions';
+
+export interface NavDropDownProps {
+	auth: {
+		isAuthenticated: boolean;
+		user: {
+			isAdmin?: boolean;
+		};
+	};
+	logout: Function;
+}
+class NavDropDown extends React.Component<NavDropDownProps> {
+	state = { on: false };
+
+	logout = (e: any) => {
+		e.preventDefault();
+		this.props.logout();
+	};
+
+	adminLinks = () => {
+		return (
+			<div className="nav__dropdown">
+				<Link to="/profile">Edit Profile</Link>
+				<Link to="/orders">Manage Orders</Link>
+				<Link to="/products">Manage Products</Link>
+				<Link to="/product">Create Products</Link>
+				<Link to="/" onClick={this.logout}>
+					Logout
+				</Link>
+			</div>
+		);
+	};
+
+	userLinks = () => {
+		return (
+			<div className="nav__dropdown">
+				<Link to="/profile">Edit Profile</Link>
+				<Link to="/orders">Orders</Link>
+				<Link to="/" onClick={this.logout}>
+					Logout
+				</Link>
+			</div>
+		);
+	};
 
 	toggle = () => {
 		this.setState({ on: !this.state.on });
@@ -34,23 +77,21 @@ class NavDropDown extends React.Component<any> {
 				<button className="nav__action" onClick={this.toggle} onMouseOver={() => this.setState({ on: true })}>
 					My Account ^
 				</button>
-				<div className={this.getDropDownClassName()}>
-					<div className="nav__dropdown">
-						<Link to="/profile">Edit Profile</Link>
-						{/* <Link to="/orders">My Orders</Link> */}
-						{/* <Link to="/orders">Manage Orders</Link> */}
-						{/* <Link to="/products">Manage Products</Link> */}
-						<Link to="/product">Create Products</Link>
-						<Link to="/logout">Logout</Link>
-					</div>
-				</div>
+				<div className={this.getDropDownClassName()}>{this.props.auth.user.isAdmin ? this.adminLinks() : this.userLinks()}</div>
 			</div>
 		);
 	}
 
 	render() {
-		return <div>{this.state.loggedIn ? this.renderDropDown() : this.renderSignInOptions()}</div>;
+		return <div>{this.props.auth.isAuthenticated ? this.renderDropDown() : this.renderSignInOptions()}</div>;
 	}
 }
 
-export default onClickOutside(NavDropDown);
+const mapStateToProps = (state: any) => {
+	return { auth: state.auth };
+};
+
+export default connect(
+	mapStateToProps,
+	{ logout }
+)(onClickOutside(NavDropDown));

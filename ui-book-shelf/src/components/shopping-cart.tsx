@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom';
 
 export interface ShoppingCartProps {
 	cartItems: Array<Product>;
+	auth: {
+		isAuthenticated: boolean;
+		user: {};
+	};
 }
 
 export interface ShoppingCartState {}
@@ -15,7 +19,7 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 	renderCartItems() {
 		return this.props.cartItems.map((item: Product, i) => {
 			return (
-				<tr key={item._id}  className="middle">
+				<tr key={item._id} className="middle">
 					<td>{i + 1}</td>
 					<td>
 						<img className="u-md-image" src={item.imageUrl} alt={item.name} />
@@ -61,7 +65,12 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 			<div className="no-products">
 				<h3 className="u-mb-md"> Your Shopping Cart is empty.</h3>
 				<p className="u-mb-sm"> Your Shopping Cart lives to serve. Give it purpose--fill it with books, CDs, videos, DVDs and more. </p>
-				<p> If you already have an account,</p> <Link to="/login">Login</Link> to see your Cart, Or Continue shopping on the <Link to="/">Book-Shelf</Link> homepage.
+				{!this.props.auth.isAuthenticated ? (
+					<span>
+						If you already have an account, <Link to="/login">Login.&nbsp;</Link>
+					</span>
+				):  ''}
+				To see your Cart, Or Continue shopping on the <Link to="/">Book-Shelf</Link> homepage.
 			</div>
 		);
 	}
@@ -79,7 +88,7 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 }
 
 const mapStateToProps = (state: any) => {
-	return { cartItems: state.cartItems };
+	return { cartItems: state.cartItems, auth: state.auth };
 };
 
 export default connect(
