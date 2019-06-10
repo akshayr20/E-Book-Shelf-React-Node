@@ -9,16 +9,11 @@ export interface UserOrdersState {}
 class UserOrders extends React.Component<UserOrdersProps, UserOrdersState> {
 	state = { UserOrders: [] };
 	componentDidMount() {
-		this.fetchUserOrders()
+		this.fetchUserOrders();
 	}
 
 	fetchUserOrders() {
-		AXIOS
-			.get(`orders/user`, {
-				params: {
-					userId: '5cfca262be7cdd1f1f04bd03'
-				}
-			})
+		AXIOS.get(`orders`)
 			.then((response: any) => {
 				console.log(response);
 			})

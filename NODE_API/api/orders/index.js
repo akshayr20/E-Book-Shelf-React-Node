@@ -4,11 +4,11 @@ const router = express.Router();
 
 const checkAuth = require('../../authorization/check-auth');
 
-const { getAllOrders, getOrderById, createOrder, deleteOrderById } = require('./order.controller');
+const { getAllOrders, getUserOrders, createOrder, deleteOrderById } = require('./order.controller');
 
-router.get('/', checkAuth, getAllOrders);
+router.get('/', checkAuth, getUserOrders);
 
-router.get('/:id', checkAuth, getOrderById);
+router.get('/all', checkAuth, getAllOrders);
 
 router.post('/', checkAuth, createOrder);
 

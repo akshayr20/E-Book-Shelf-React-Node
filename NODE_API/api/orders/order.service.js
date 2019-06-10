@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 module.exports.getAllOrders = async () => {
 	try {
 		const orders = await Order.find()
-			.select('productId purchaseQuantity _id')
+			.select('product purchaseQuantity _id')
 			.populate('product', 'name');
 		if (!orders.length) {
 			throw new Error('NO_ORDER_FOUND');
@@ -28,10 +28,10 @@ module.exports.getAllOrders = async () => {
 
 module.exports.getUserOrders = async id => {
 	try {
-		const orders = await Order.find({ userId: id })
-			.select('productId purchaseQuantity _id')
-			.populate('product', 'name');
-		if (!order) {
+		const orders = await Order.find({ user: id })
+			.select('product purchaseQuantity _id')
+			.populate('product');
+		if (!orders) {
 			throw new Error('NO_ORDER_FOUND');
 		}
 		return { orders };
@@ -42,8 +42,6 @@ module.exports.getUserOrders = async id => {
 
 module.exports.createOrder = async userCart => {
 	try {
-		console.log(userCart);
-
 		for (const item of userCart) {
 			const { productId, purchaseQuantity, userId } = item;
 			const product = await Product.findById(productId);
@@ -60,9 +58,9 @@ module.exports.createOrder = async userCart => {
 
 			const order = new Order({
 				_id: new mongoose.Types.ObjectId(),
-				productId,
-				purchaseQuantity,
-				userId
+				product: productId,
+				purchaseQuantity: purchaseQuantity,
+				user: userId
 			});
 
 			await order.save();
@@ -81,14 +79,7 @@ module.exports.createOrder = async userCart => {
 module.exports.deleteOrderById = async id => {
 	try {
 		await Order.remove({ _id: id });
-		return {
-			message: 'ORDER_DELETED',
-			request: {
-				type: 'GET',
-				description: 'ALL_ORDER',
-				url: `http://localhost:3000/orders`
-			}
-		};
+		return { message: 'ORDER_DELETED' };
 	} catch (error) {
 		throw error;
 	}

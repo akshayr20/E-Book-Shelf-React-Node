@@ -11,7 +11,7 @@ module.exports.getAllOrders = async (req, res) => {
 
 module.exports.getUserOrders = async (req, res) => {
 	try {
-		const response = await orderService.getUserOrders(req.params.id);
+		const response = await orderService.getUserOrders(req.userData.userId);
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json({ error });
