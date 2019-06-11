@@ -14,6 +14,16 @@ export const fetchProducts = () => async (dispatch: any) => {
 	}
 };
 
+export const fetchOrders = () => async (dispatch: any) => {
+	try {
+		const response = await AXIOS.get('orders');
+		const { orders } = response.data;
+		dispatch({ type: 'FETCH_ORDERS', payload: orders });
+	} catch (error) {
+		dispatch({ type: 'FETCH_ORDERS', payload: [] });		
+	}
+};
+
 export const createProduct = (payload: Product) => async () => {
 	const config = {
 		headers: { Authorization: 'Bearer ' + localStorage.jwtToken }

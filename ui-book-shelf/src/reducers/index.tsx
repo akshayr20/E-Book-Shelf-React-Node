@@ -12,6 +12,14 @@ export const productsReducer = (Products: Array<Product> = [], action: Action): 
 	return Products;
 };
 
+export const ordersReducer = (Orders: Array<any> = [], action: Action): Array<Product> => {
+	if (action.type === 'FETCH_ORDERS') {
+		return [...action.payload];
+	}
+	return Orders;
+};
+
+
 export const addToCartReducer = (selectedProducts: Array<Product> = [], action: Action) => {
 	if (action.type === 'ADD_TO_CART') {
 		const alreadyInTheCart = selectedProducts.find(product => product._id === action.payload._id);
@@ -25,6 +33,7 @@ export const addToCartReducer = (selectedProducts: Array<Product> = [], action: 
 
 export default combineReducers({
 	products: productsReducer,
+	orders: ordersReducer,
 	cartItems: addToCartReducer,
 	auth: authReducer
 });
