@@ -3,14 +3,13 @@ import AXIOS from '../api/axios-instance';
 
 //  Action Creator
 
-
 export const fetchProducts = () => async (dispatch: any) => {
 	try {
 		const response = await AXIOS.get('products');
 		const { products } = response.data;
 		dispatch({ type: 'FETCH_PRODUCTS', payload: products });
 	} catch (error) {
-		dispatch({ type: 'FETCH_PRODUCTS', payload: [] });		
+		dispatch({ type: 'FETCH_PRODUCTS', payload: [] });
 	}
 };
 
@@ -20,7 +19,7 @@ export const fetchOrders = () => async (dispatch: any) => {
 		const { orders } = response.data;
 		dispatch({ type: 'FETCH_ORDERS', payload: orders });
 	} catch (error) {
-		dispatch({ type: 'FETCH_ORDERS', payload: [] });		
+		dispatch({ type: 'FETCH_ORDERS', payload: [] });
 	}
 };
 
@@ -37,5 +36,11 @@ export const addToCart = (product: Product) => {
 	return {
 		type: 'ADD_TO_CART',
 		payload: product
+	};
+};
+
+export const clearCart = () => {
+	return {
+		type: 'CLEAR_CART'
 	};
 };

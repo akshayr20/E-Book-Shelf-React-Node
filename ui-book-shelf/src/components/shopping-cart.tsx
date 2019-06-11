@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions';
+import { clearCart } from '../actions';
 import { Product } from '../interface';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ export interface ShoppingCartProps {
 		isAuthenticated: boolean;
 		user: {};
 	};
+	clearCart: Function;
 }
 
 export interface ShoppingCartState {}
@@ -43,7 +44,9 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 			<div>
 				<header className="u-sm-pd space-between-flex sm-border">
 					<h3>Your Shopping Bag</h3>
-					<button  className="ui-btn ui-btn__warning">Clear Cart</button>
+					<button className="ui-btn ui-btn__warning" onClick={() => this.props.clearCart()}>
+						Clear Cart
+					</button>
 				</header>
 				<Table responsive striped bordered hover>
 					<thead>
@@ -96,5 +99,5 @@ const mapStateToProps = (state: any) => {
 
 export default connect(
 	mapStateToProps,
-	{ addToCart }
+	{ clearCart }
 )(ShoppingCart);
