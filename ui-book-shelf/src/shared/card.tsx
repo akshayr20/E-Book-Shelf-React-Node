@@ -1,31 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addToCart } from '../actions';
+import { Product } from '../interface';
+import { Link } from 'react-router-dom';
+
 export interface CardProps {
-	product: {
-		imageUrl: string;
-		name: string;
-		description: string;
-		price: number;
-	};
-	onAddToCart: Function;
+	product: Product;
+	cartItems: Array<Product>;
+	addToCart: Function;
 }
 
-const Card: React.SFC<CardProps> = props => {
-	console.log(props.product.imageUrl);
-	return (
-		<div className="card">
-			<div className="card__image">
+export interface CardState {}
 
-				<img src={props.product.imageUrl} alt={props.product.name} />
+class Card extends React.Component<CardProps, CardState> {
+	renderButton() {
+		const isItemInCart = !!this.props.cartItems.find(item => item._id === this.props.product._id);
+		return (
+			<React.Fragment>
+				{isItemInCart ? (
+					<Link to="/cart" className="ui-btn ui-btn__green max-width">
+						Go to Cart
+					</Link>
+				) : (
+					<button className="ui-btn ui-btn__primary max-width" onClick={() => this.props.addToCart(this.props.product)}>
+						Add to Cart
+					</button>
+				)}
+			</React.Fragment>
+		);
+	}
+	render() {
+		console.log(this.props);
+		return (
+			<div className="card">
+				<div className="card__image">
+					<img src={this.props.product.imageUrl} alt={this.props.product.name} />
+				</div>
+				<div className="card__body">
+					<span className="price">Price: {this.props.product.price}</span>
+					<span className="title">{this.props.product.name}</span>
+					{this.renderButton()}
+				</div>
 			</div>
-			<div className="card__body">
-				<span className="price">Price: {props.product.price}</span>
-				<span className="title">{props.product.name}</span>
-				<button className="ui-btn ui-btn__primary max-width" onClick={() => props.onAddToCart(props.product)}>
-					Add to Cart
-				</button>
-			</div>
-		</div>
-	);
+		);
+	}
+}
+
+const mapStateToProps = (state: any) => {
+	return { cartItems: state.cartItems };
 };
 
-export default Card;
+export default connect(
+	mapStateToProps,
+	{ addToCart }
+)(Card);

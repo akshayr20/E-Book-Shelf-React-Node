@@ -29,6 +29,27 @@
 		background-color: #4285f4;
 	}
 
+	&__green {
+		border: 1px solid #1aa863;
+		background-color: #18a861;
+		color: #fff;
+	}
+
+	&__warning {
+		border: 1px solid #c72828;
+		background-color: #c72828;
+		color: #fff;
+	}
+
+	&__warning:hover {
+		background-color: #a81818;
+	}
+
+	&__green:hover {
+		background-color: #169457;
+		color: #fff;
+	}
+
 	&__white {
 		border: 1px solid #bbb;
 		color: #666;

@@ -41,8 +41,9 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 	createCartTable() {
 		return (
 			<div>
-				<header className="u-mb-md">
+				<header className="u-sm-pd space-between-flex sm-border">
 					<h3>Your Shopping Bag</h3>
+					<button  className="ui-btn ui-btn__warning">Clear Cart</button>
 				</header>
 				<Table responsive striped bordered hover>
 					<thead>
@@ -69,7 +70,9 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 					<span>
 						If you already have an account, <Link to="/login">Login.&nbsp;</Link>
 					</span>
-				):  ''}
+				) : (
+					''
+				)}
 				To see your Cart, Or Continue shopping on the <Link to="/">Book-Shelf</Link> homepage.
 			</div>
 		);

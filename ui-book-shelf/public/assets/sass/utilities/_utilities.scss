@@ -18,6 +18,28 @@
 	background-color: #f9243f !important;
 }
 
+//  padding
+.u-sm-pd {
+	padding: 1rem;
+}
+.u-md-pd {
+	padding: 2rem;
+}
+.u-lg-pd {
+	padding: 4rem;
+}
+
+//margin
+.u-mg-sm {
+	margin: 1rem;
+}
+.u-mg-md {
+	margin: 2rem;
+}
+.u-mg-lg {
+	margin: 4rem;
+}
+
 // margin bottom
 .u-mb-sm {
 	margin-bottom: 1rem;
@@ -76,4 +98,9 @@
 	td {
 		vertical-align: middle;
 	}
+}
+
+//border
+.sm-border {
+	border: 1px solid #ccc;
 }

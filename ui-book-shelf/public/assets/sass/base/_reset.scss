@@ -21,7 +21,9 @@ li {
 	color: inherit;
 }
 
-a {
+link,
+a,
+a:hover {
 	cursor: pointer;
 	text-decoration: none;
 }
