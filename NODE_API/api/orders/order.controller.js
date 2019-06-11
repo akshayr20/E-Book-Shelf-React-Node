@@ -21,7 +21,7 @@ module.exports.getUserOrders = async (req, res) => {
 module.exports.createOrder = async (req, res) => {
 	try {
 		const userCart = req.body.userCart;
-		const response = await orderService.createOrder(userCart);
+		const response = await orderService.createOrder(userCart, req.userData.userId);
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json(error);

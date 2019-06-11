@@ -30,12 +30,9 @@ class Card extends React.Component<CardProps, CardState> {
 		);
 	}
 	render() {
-		console.log(this.props);
 		return (
 			<div className="card">
-				<div className="card__image">
-					<img src={this.props.product.imageUrl} alt={this.props.product.name} />
-				</div>
+				<img className="card__image" src={this.props.product.imageUrl} alt={this.props.product.name} />
 				<div className="card__body">
 					<span className="price">Price: {this.props.product.price}</span>
 					<span className="title">{this.props.product.name}</span>

@@ -20,17 +20,15 @@ class App extends React.Component<AppProps, AppState> {
 			<div className="app-container">
 				<BrowserRouter>
 					<Navbar />
-					<div>
-						<Route path="/" exact component={LandingScreen} />
-						<Route path="/cart" component={ShoppingCart} />
-						<Route path="/product" exact component={Product} />
-						<Route path="/product/:id" component={Product} />
-						<Route path="/products" exact component={ProductList} />
-						<Route path="/orders" component={UserOrders} />
-						<Route path="/profile" component={UserProfile} />
-						<Route path="/login" component={Login} />
-						<Route path="/sign-up" component={SignUp} />
-					</div>
+					<Route path="/" exact component={LandingScreen} />
+					<Route path="/cart" component={ShoppingCart} />
+					<Route path="/product" exact component={Product} />
+					<Route path="/product/:id" component={Product} />
+					<Route path="/products" exact component={ProductList} />
+					<Route path="/orders" component={UserOrders} />
+					<Route path="/profile" component={UserProfile} />
+					<Route path="/login" component={Login} />
+					<Route path="/sign-up" component={SignUp} />
 				</BrowserRouter>
 			</div>
 		);

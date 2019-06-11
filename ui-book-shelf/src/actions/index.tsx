@@ -1,4 +1,4 @@
-import { Product } from '../interface';
+import { Product, CheckOutItems } from '../interface';
 import AXIOS from '../api/axios-instance';
 
 //  Action Creator
@@ -23,12 +23,8 @@ export const fetchOrders = () => async (dispatch: any) => {
 	}
 };
 
-export const createProduct = (payload: Product) => async () => {
-	const config = {
-		headers: { Authorization: 'Bearer ' + localStorage.jwtToken }
-	};
-
-	const response = await AXIOS.post('products', payload, config);
+export const createProduct = (product: Product) => async () => {
+	const response = await AXIOS.post('products', product);
 	console.log(response);
 };
 
@@ -43,4 +39,11 @@ export const clearCart = () => {
 	return {
 		type: 'CLEAR_CART'
 	};
+};
+
+export const checkOut = (userCart: Array<CheckOutItems>) => async (dispatch: any) => {
+	try {
+		const response = await AXIOS.post('orders', { userCart });
+		console.log(response);
+	} catch (error) {}
 };

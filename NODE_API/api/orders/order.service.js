@@ -12,14 +12,7 @@ module.exports.getAllOrders = async () => {
 		}
 		return {
 			count: orders.length,
-			orders: orders.map(order => {
-				return {
-					_id: order._id,
-					productId: order.productId,
-					purchaseQuantity: order.purchaseQuantity,
-					userId: order.userId
-				};
-			})
+			orders
 		};
 	} catch (error) {
 		throw error;
@@ -29,7 +22,7 @@ module.exports.getAllOrders = async () => {
 module.exports.getUserOrders = async id => {
 	try {
 		const orders = await Order.find({ user: id })
-			.select('product purchaseQuantity _id')
+			.select('product purchaseQuantity _id date')
 			.populate('product');
 		if (!orders) {
 			throw new Error('NO_ORDER_FOUND');
@@ -40,10 +33,10 @@ module.exports.getUserOrders = async id => {
 	}
 };
 
-module.exports.createOrder = async userCart => {
+module.exports.createOrder = async (userCart, userId ) => {
 	try {
 		for (const item of userCart) {
-			const { productId, purchaseQuantity, userId } = item;
+			const { productId, purchaseQuantity} = item;
 			const product = await Product.findById(productId);
 			if (!product) {
 				throw new Error('PRODUCT_NOT_FOUND');
