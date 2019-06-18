@@ -1,11 +1,15 @@
 import React from 'react';
 import { login } from '../../actions/auth-actions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 export interface LoginProps {
 	login: Function;
+	auth: {
+		isAuthenticated: boolean;
+		user: {};
+	};
 }
 
 class Login extends React.Component<LoginProps> {
@@ -17,6 +21,10 @@ class Login extends React.Component<LoginProps> {
 	};
 
 	render() {
+		return <div>{!this.props.auth.isAuthenticated ? this.LoginPage() : <Redirect to="/" />}</div>;
+	}
+
+	private LoginPage() {
 		return (
 			<div className="popup">
 				<div className="auth">
@@ -25,7 +33,7 @@ class Login extends React.Component<LoginProps> {
 						<h3 className="u-mb-sm">
 							Don't have an account?
 							<Link to="sign-up" className="color-primary">
-								&nbsp;Sign Up Now
+								&nbsp; Sign Up Now
 							</Link>
 						</h3>
 
@@ -58,7 +66,11 @@ class Login extends React.Component<LoginProps> {
 	}
 }
 
+const mapStateToProps = (state: any) => {
+	return { auth: state.auth };
+};
+
 export default connect(
-	null,
+	mapStateToProps,
 	{ login }
 )(Login);

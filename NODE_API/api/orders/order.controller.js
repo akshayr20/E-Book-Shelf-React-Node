@@ -24,7 +24,7 @@ module.exports.createOrder = async (req, res) => {
 		const response = await orderService.createOrder(userCart, req.userData.userId);
 		res.status(200).json(response);
 	} catch (error) {
-		res.status(500).json(error);
+		res.status(500).json({ error: error.message });
 	}
 };
 

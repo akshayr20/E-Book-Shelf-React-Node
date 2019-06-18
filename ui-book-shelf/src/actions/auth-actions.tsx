@@ -19,7 +19,7 @@ export const login = (authCredentials: any) => async (dispatch: any) => {
 		AXIOS.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 		dispatch(setCurrentUser(jwt.decode(token)));
 	} catch (error) {
-		console.log(error);
+		return error;
 	}
 };
 
