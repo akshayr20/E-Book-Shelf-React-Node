@@ -1,17 +1,15 @@
-const orderService = require('./order.service');
+// @ts-check
 
-module.exports.getAllOrders = async (req, res) => {
-	try {
-		const response = await orderService.getAllOrders();
-		res.status(200).json(response);
-	} catch (error) {
-		res.status(500).json(error);
-	}
-};
+const orderService = require('./order.service');
 
 module.exports.getUserOrders = async (req, res) => {
 	try {
-		const response = await orderService.getUserOrders(req.userData.userId);
+		let response;
+		if (req.userData.isAdmin) {
+			response = await orderService.getAllOrders();
+		} else {
+			response = await orderService.getUserOrders(req.userData.userId);
+		}
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json({ error });

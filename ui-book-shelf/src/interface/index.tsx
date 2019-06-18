@@ -9,7 +9,7 @@ export interface Product {
 export interface Orders {
 	_id: string;
 	purchaseQuantity: number;
-	date: Date;
+	date: string;
 	product: Product;
 }
 

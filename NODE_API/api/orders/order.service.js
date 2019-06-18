@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 module.exports.getAllOrders = async () => {
 	try {
 		const orders = await Order.find()
-			.select('product purchaseQuantity _id')
-			.populate('product', 'name');
+			.select('product purchaseQuantity _id date')
+			.populate('product');
 		if (!orders.length) {
 			throw new Error('NO_ORDER_FOUND');
 		}

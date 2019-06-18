@@ -49,7 +49,7 @@ class UserOrders extends React.Component<UserOrdersProps, UserOrdersState> {
 		return (
 			<div>
 				<header className="u-mb-md">
-					<h3>Your Shopping Bag</h3>
+					<h3>Your Orders</h3>
 				</header>
 				<Table responsive striped bordered hover>
 					<thead>
@@ -72,7 +72,7 @@ class UserOrders extends React.Component<UserOrdersProps, UserOrdersState> {
 									</td>
 									<td>{item.product.name}</td>
 									<td>Rs. {item.product.price}.00</td>
-									<td> {item.date}</td>
+									<td> {item.date.split('T')[0]}</td>
 									{/* <td>
 										<span className="snippet-btn">
 											<button className="ui-btn  bg-color-red">-</button>

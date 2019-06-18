@@ -7,7 +7,7 @@ export interface UserProfileState {}
 class UserProfile extends React.Component<UserProfileProps, UserProfileState> {
 	state = { UserProfile: [] };
 	render() {
-		return <div>UserProfile</div>;
+		return <div>UserProfile: Work Under Progress</div>;
 	}
 }
 

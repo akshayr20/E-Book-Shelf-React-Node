@@ -1,4 +1,5 @@
 import React from 'react';
+import { History } from 'history';
 import { connect } from 'react-redux';
 import { clearCart, checkOut } from '../actions';
 import { Product } from '../interface';
@@ -13,6 +14,7 @@ export interface ShoppingCartProps {
 	};
 	clearCart: Function;
 	checkOut: Function;
+	history: History;
 }
 
 export interface ShoppingCartState {}
@@ -24,6 +26,10 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 		}, 0);
 	}
 
+	handleCheckOut() {
+		!this.props.auth.isAuthenticated ? this.props.history.push('/login') : this.checkOut();
+	}
+
 	checkOut() {
 		const processedOrders = this.props.cartItems.map(item => {
 			return {
@@ -31,7 +37,14 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 				productId: item._id
 			};
 		});
-		this.props.checkOut(processedOrders);
+		this.props.checkOut(processedOrders).then(
+			(res: any) => {
+				this.props.history.push('orders');
+			},
+			(err: Error) => {
+				console.log(err);
+			}
+		);
 	}
 
 	renderCartTable() {
@@ -77,7 +90,7 @@ class ShoppingCart extends React.Component<ShoppingCartProps, ShoppingCartState>
 				</Table>
 				<footer className="u-sm-pd space-between-flex sm-border">
 					<h3>Item Total: Rs.{this.getCartTotalPrice()}.00</h3>
-					<button className="ui-btn ui-btn__primary" onClick={() => this.checkOut()}>
+					<button className="ui-btn ui-btn__primary" onClick={() => this.handleCheckOut()}>
 						CHECK OUT
 					</button>
 				</footer>

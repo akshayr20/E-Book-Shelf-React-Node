@@ -1,10 +1,12 @@
 import React from 'react';
+import { History } from 'history';
 import { Form } from 'react-bootstrap';
 import { createProduct } from '../../actions';
 import { connect } from 'react-redux';
 
 export interface ProductProps {
 	createProduct: Function;
+	history: History;
 }
 
 export interface ProductState {}
@@ -14,7 +16,14 @@ class EditProduct extends React.Component<ProductProps, ProductState> {
 
 	handleSubmit = (event: any) => {
 		event.preventDefault();
-		this.props.createProduct(this.state);
+		this.props.createProduct(this.state).then(
+			(res: any) => {
+				this.props.history.push('/');
+			},
+			(err: Error) => {
+				console.log(err);
+			}
+		);
 	};
 
 	render() {
@@ -67,6 +76,10 @@ class EditProduct extends React.Component<ProductProps, ProductState> {
 		);
 	}
 }
+
+// const mapStateToProps = (state: any) => {
+// 	return { cartItems: state.cartItems, auth: state.auth };
+// };
 
 export default connect(
 	null,

@@ -24,8 +24,12 @@ export const fetchOrders = () => async (dispatch: any) => {
 };
 
 export const createProduct = (product: Product) => async () => {
-	const response = await AXIOS.post('products', product);
-	console.log(response);
+	try {
+		const response = await AXIOS.post('products', product);
+		return response;
+	} catch (error) {
+		throw error;
+	}
 };
 
 export const addToCart = (product: Product) => {
@@ -44,6 +48,9 @@ export const clearCart = () => {
 export const checkOut = (userCart: Array<CheckOutItems>) => async (dispatch: any) => {
 	try {
 		const response = await AXIOS.post('orders', { userCart });
-		console.log(response);
-	} catch (error) {}
+		dispatch(clearCart());
+		return response;
+	} catch (error) {
+		throw error;
+	}
 };
